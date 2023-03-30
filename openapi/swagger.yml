@@ -1,0 +1,696 @@
+openapi: 3.0.3
+info:
+  title: Sample REST APIs using Flask, OpenAPI and Connexion
+  description: Sample User Service
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:5000/api
+    description: Rest Server showing Swagger and Connexion capability
+
+paths:
+  /generate_token:
+    get:
+      operationId: services.user_service.UserService.generate_user_token
+      tags:
+        - User
+      summary: Login user in the system and returns Authentication Token.
+      description: Login user in the system and returns Authentication Token.
+      responses:
+        "200":
+          description: Login user in the system and returns Authentication Token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  AuthToken:
+                    type: string
+      security:
+        - basic: [ ]
+
+  /user:
+    get:
+      operationId: controllers.user_controller.UserController.get_all
+      tags:
+        - User
+      summary: Returns a list of users.
+      description: Returns a list of users.
+      responses:
+        "200": # status code
+          description: Return the entire list of users.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      security:
+        - jwt: [ ]
+
+    post:
+      operationId: controllers.user_controller.UserController.create
+      tags:
+        - User
+      summary: Create a new User
+      description: Create a new User
+      requestBody:
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  phone:
+                    type: string
+                  address:
+                    type: string
+                  login:
+                    type: string
+                  password:
+                    type: string
+                  role:
+                    type: string
+      responses:
+        "201":
+          description: User Created successfully
+      security:
+        - jwt: [ ]
+
+  /user/{user_id}:
+    get:
+      operationId: controllers.user_controller.UserController.get
+      tags:
+        - User
+      summary: Return a User with given ID
+      description: Return a User with given ID
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Return a User with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      security:
+        - jwt: [ ]
+    delete:
+      operationId: controllers.user_controller.UserController.delete
+      tags:
+        - User
+      summary: Delete a User with given ID
+      description: Delete a User with given ID
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Deleted an User with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      security:
+        - jwt: [ ]
+    put:
+      operationId: controllers.user_controller.UserController.update
+      tags:
+        - User
+      summary: Update a User with given ID
+      description: Update a User with given ID
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                  id:
+                    type: integer
+                    format: int64
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  phone:
+                    type: string
+                  address:
+                    type: string
+                  login:
+                    type: string
+                  password:
+                    type: string
+                  role:
+                    type: string
+      responses:
+        "200": # status code
+          description: Updated an Item with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      security:
+        - jwt: [ ]
+
+  /product:
+    get:
+      operationId: controllers.product_controller.ProductController.get_all
+      tags:
+        - Product
+      summary: Returns a list of products.
+      description: Returns a list of products.
+      responses:
+        "200": # status code
+          description: Return the entire list of products.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+      security:
+        - jwt: [ ]
+
+    post:
+      operationId: controllers.product_controller.ProductController.create
+      tags:
+        - Product
+      summary: Create a new Product
+      description: Create a new Product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                author:
+                  type: string
+                price:
+                  type: number
+                image_path:
+                  type: string
+      responses:
+        "201":
+          description: Product Created successfully
+      security:
+        - jwt: [ ]
+
+  /product/{product_id}:
+    get:
+      operationId: controllers.product_controller.ProductController.get
+      tags:
+        - Product
+      summary: Return a Product with given ID
+      description: Return a Product with given ID
+      parameters:
+        - name: product_id
+          in: path
+          description: Product ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Return a Product with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+      security:
+        - jwt: [ ]
+
+    delete:
+      operationId: controllers.product_controller.ProductController.delete
+      tags:
+        - Product
+      summary: Delete a Product with given ID
+      description: Delete a Product with given ID
+      parameters:
+        - name: product_id
+          in: path
+          description: Product ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Deleted an Product with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+      security:
+        - jwt: [ ]
+
+    put:
+      operationId: controllers.product_controller.ProductController.update
+      tags:
+        - Product
+      summary: Update a Product with given ID
+      description: Update a Product with given ID
+      parameters:
+        - name: product_id
+          in: path
+          description: Product ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                name:
+                  type: string
+                description:
+                  type: string
+                author:
+                  type: string
+                price:
+                  type: number
+                image_path:
+                  type: string
+      responses:
+        "200": # status code
+          description: Updated an Item with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+      security:
+        - jwt: [ ]
+
+  /store_item:
+    get:
+      operationId: controllers.store_item_controller.StoreItemController.get_all
+      tags:
+        - StoreItem
+      summary: Returns a list of store_items.
+      description: Returns a list of store_items.
+      responses:
+        "200": # status code
+          description: Return the entire list of store_items.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoreItem"
+      security:
+        - jwt: [ ]
+
+    post:
+      operationId: controllers.store_item_controller.StoreItemController.create
+      tags:
+        - StoreItem
+      summary: Create a new StoreItem
+      description: Create a new StoreItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                product:
+                  type: integer
+                  format: int64
+                available_qty:
+                  type: integer
+                  format: int64
+                booked_qty:
+                  type: integer
+                  format: int64
+                sold_qty:
+                  type: integer
+                  format: int64
+      responses:
+        "201":
+          description: StoreItem Created successfully
+      security:
+        - jwt: [ ]
+
+
+  /store_item/{store_item_id}:
+    get:
+      operationId: controllers.store_item_controller.StoreItemController.get
+      tags:
+        - StoreItem
+      summary: Return a StoreItem with given ID
+      description: Return a StoreItem with given ID
+      parameters:
+        - name: store_item_id
+          in: path
+          description: StoreItem ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Return a StoreItem with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoreItem"
+      security:
+        - jwt: [ ]
+
+    delete:
+      operationId: controllers.store_item_controller.StoreItemController.delete
+      tags:
+        - StoreItem
+      summary: Delete a StoreItem with given ID
+      description: Delete a StoreItem with given ID
+      parameters:
+        - name: store_item_id
+          in: path
+          description: StoreItem ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Deleted an StoreItem with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoreItem"
+      security:
+        - jwt: [ ]
+
+    put:
+      operationId: controllers.store_item_controller.StoreItemController.update
+      tags:
+        - StoreItem
+      summary: Update a StoreItem with given ID
+      description: Update a StoreItem with given ID
+      parameters:
+        - name: store_item_id
+          in: path
+          description: StoreItem ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int64
+                product:
+                  type: integer
+                  format: int64
+                available_qty:
+                  type: integer
+                  format: int64
+                booked_qty:
+                  type: integer
+                  format: int64
+                sold_qty:
+                  type: integer
+                  format: int64
+      responses:
+        "200": # status code
+          description: Updated an Item with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StoreItem"
+      security:
+        - jwt: [ ]
+
+  /booking:
+    get:
+      operationId: controllers.booking_controller.BookingController.get_all
+      tags:
+        - Booking
+      summary: Returns a list of bookings.
+      description: Returns a list of bookings.
+      responses:
+        "200": # status code
+          description: Return the entire list of bookings.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+      security:
+        - jwt: [ ]
+
+    post:
+      operationId: controllers.booking_controller.BookingController.create
+      tags:
+        - Booking
+      summary: Create a new Booking
+      description: Create a new Booking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                 product:
+                   type: integer
+                 description:
+                   type: string
+                 user:
+                   type: integer
+                 delivery_address:
+                   type: string
+                 delivery_date:
+                   type: string
+                   format: date
+                   example: '2022-07-01'
+                 delivery_datetime:
+                   type: string
+                   format: date-time
+                   example: '2017-07-21T17:32:28Z'
+                 status_id:
+                   type: string
+                 quantity:
+                   type: integer
+      responses:
+        "201":
+          description: Booking Created successfully
+      security:
+        - jwt: [ ]
+
+  /booking/{booking_id}:
+    get:
+      operationId: controllers.booking_controller.BookingController.get
+      tags:
+        - Booking
+      summary: Return a Booking with given ID
+      description: Return a Booking with given ID
+      parameters:
+        - name: booking_id
+          in: path
+          description: Booking ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Return a Booking with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+      security:
+        - jwt: [ ]
+
+    delete:
+      operationId: controllers.booking_controller.BookingController.delete
+      tags:
+        - Booking
+      summary: Delete a Booking with given ID
+      description: Delete a Booking with given ID
+      parameters:
+        - name: booking_id
+          in: path
+          description: Booking ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Deleted an UBooking with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+      security:
+        - jwt: [ ]
+
+    put:
+      operationId: controllers.booking_controller.BookingController.update
+      tags:
+        - Booking
+      summary: Update a Booking with given ID
+      description: Update a Booking with given ID
+      parameters:
+        - name: booking_id
+          in: path
+          description: Booking ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product:
+                  type: integer
+                description:
+                  type: string
+                user:
+                  type: integer
+                delivery_address:
+                  type: string
+                delivery_date:
+                  type: string
+                  format: date
+                  example: '2022-07-01'
+                delivery_datetime:
+                  type: string
+                  format: date-time
+                  example: '2017-07-21T17:32:28Z'
+                status_id:
+                  type: string
+                quantity:
+                  type: integer
+      responses:
+        "200": # status code
+          description: Updated an Item with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+      security:
+        - jwt: [ ]
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        login:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+    Product:
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        author:
+          type: string
+        price:
+          type: number
+        image_path:
+          type: string
+    StoreItem:
+      properties:
+        id:
+          type: integer
+          format: int64
+        product:
+          type: integer
+          format: int64
+        available_qty:
+          type: integer
+          format: int64
+        booked_qty:
+          type: integer
+          format: int64
+        sold_qty:
+          type: integer
+          format: int64
+    Booking:
+      properties:
+        product:
+          type: integer
+        description:
+          type: string
+        user:
+          type: integer
+        delivery_address:
+          type: string
+        delivery_date:
+          type: string
+          format: date
+          example: '2022-07-01'
+        delivery_datetime:
+          type: string
+          format: date-time
+          example: '2017-07-21T17:32:28Z'
+        status_id:
+          type: string
+        quantity:
+          type: integer
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      x-bearerInfoFunc: authenticator.jwt_authentication
+    basic:
+      type: http
+      scheme: basic
+      x-basicInfoFunc: authenticator.basic_authentication

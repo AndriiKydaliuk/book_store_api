@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="{{ url_for('static', filename='catalogue.js') }}"></script>
+<div class="container">
+<div class="row">
+    <div class="col-12  " style="margin-top:20px;">
+        <div style="margin-bottom:30px;">
+        </div>
+
+            <!-- Modal 1 for adding a product -->
+            <div class="modal" id="add_product" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="add_product_form"  method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="add_name" class="col-sm-4 col-form-label">Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="add_name"
+                                            placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="add_description" class="col-sm-4 col-form-label">description</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="add_description"
+                                            placeholder="description">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="add_author" class="col-sm-4 col-form-label">author</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="add_author"
+                                            placeholder="author">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="add_price" class="col-sm-4 col-form-label">price</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" step="0.01" class="form-control" id="add_price" placeholder="price">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="add_image_path" class="col-sm-4 col-form-label">Image</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="add_image_path" placeholder="image">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal 2 for editing a product -->
+            <div class="modal" id="edit_product" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit a product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="edit_product_form"  method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="edit_name" class="col-sm-4 col-form-label">Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="edit_name"
+                                            placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="edit_id" class="col-sm-4 col-form-label">Id</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" class="form-control" id="edit_id"
+                                            placeholder="Id">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="edit_description" class="col-sm-4 col-form-label">description</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="edit_description" placeholder="description">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="edit_author" class="col-sm-4 col-form-label">author</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="edit_author" placeholder="author">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="edit_price" class="col-sm-4 col-form-label">price</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" step="0.01" class="form-control" id="edit_price" placeholder="price">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="edit_image" class="col-sm-4 col-form-label">Image</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="edit_image" placeholder="image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                 </div>
+                </div>
+            </div>
+
+            <!-- Modal 3 for deleting a product -->
+            <div class="modal" id="delete_product" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete a product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="delete_product_form"  method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label for="delete_id" class="col-sm-4 col-form-label">Id</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="delete_id"
+                                            placeholder="Id">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+                <button type="button" data-toggle="modal" class="btn btn-sm btn-primary" data-target="#search_product">
+                        Search
+                </button>
+            <div class="row search_fields">
+
+            </div>
+            <div class="row products">
+            {% for product in products %}
+                <div class="product col-4">
+                    <div>
+                        <div class="image" style="background-image:url({{product.image_path }});"></div>
+                        <div class="info">
+                            <h3 class="name_cell">{{ product.name }}</h3>
+                            <p class="id_cell">{{ product.id }}</p>
+                            <p class="description_cell">{{ product.description }}</p>
+                        </div>
+                        <p class="author_cell">{{ product.author }}</p>
+                        <p class="price_cell">{{ product.price }}</p>
+                        <div class="buttons row">
+                            <button type="button" data-toggle="modal" class="btn btn-sm btn-primary"
+                                    data-target="#edit_product" onclick="setEditModal(event)">
+                                Edit
+                            </button>
+                            <button type="button" data-toggle="modal" class="btn btn-sm btn-danger"
+                                    data-target="#delete_product" onclick="setDeleteModal(event)">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+            </div>
+            <div class="create_product_button">
+
+                <button type="button" data-toggle="modal" class="btn btn-sm btn-success" data-target="#add_product"
+                    style="margin-bottom:15px;">
+                    Create
+                </button>
+            <div>
+    <div class="col-1" style="margin-top:20px;"></div>
+</div>
+</div>
+{% endblock %}
+</div></div>
+</div>

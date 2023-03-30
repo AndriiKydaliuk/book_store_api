@@ -1,0 +1,14 @@
+.idea
+.idea*
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+.cache/
+*.idsig
+*.ipa
+*.log
+*.bin
+*.json
+venv
+instance
