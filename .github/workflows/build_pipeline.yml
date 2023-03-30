@@ -29,7 +29,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Api Tests
       run: |
-        pytest test_user_service.py
+        pytest Tests/APITests/test_user_service.py
     - name: Unittests
       run: |
         pytest Tests/Unittests/test_user_service.py
