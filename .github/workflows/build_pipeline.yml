@@ -30,4 +30,4 @@ jobs:
     - name: Api Tests
       run: python Tests/APITests/test_user_service.py
     - name: Unittests
-      run: python Tests/Unittests/test_user_service.py
+      run: python -m pytest --import-mode=append tests/
