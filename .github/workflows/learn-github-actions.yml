@@ -2,12 +2,8 @@ name: github-actions
 run-name: is learning GitHub Actions
 on: [push]
 jobs:
-  check-bats-version:
+  job_1:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+      - run: python pip install requirements
+      - run: python pytest Tests/APITests/test_user_service
