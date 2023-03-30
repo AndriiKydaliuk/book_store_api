@@ -29,9 +29,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Api Tests
       run: |
-        cd $GITHUB_WORKSPACE
-        python Tests/APITests/test_user_service.py
+        pytest test_user_service.py
     - name: Unittests
       run: |
-        cd $GITHUB_WORKSPACE
-        python Tests/Unittests/test_user_service.py
+        pytest Tests/Unittests/test_user_service.py
