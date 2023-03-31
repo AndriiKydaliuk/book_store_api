@@ -34,7 +34,7 @@ jobs:
         run: |
           python -m pytest --import-mode=append Tests/Unittests/
 
-      - name: Generate Report
+      - name: Generate Coverage Report
         run: |
           coverage run -m pytest --import-mode=append Tests/Unittests/
 
