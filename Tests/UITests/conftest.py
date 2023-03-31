@@ -22,3 +22,4 @@ def app():
 def driver():
     driver = webdriver.Chrome()
     yield driver
+

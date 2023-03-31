@@ -24,7 +24,7 @@ def create_app() -> Flask:
     """Factory method for Flask provider."""
     options = {'swagger_ui': True}
     connexion_app = connexion.App("__name__",
-                                  specification_dir=str(Path(__file__).parent) + './openapi/',
+                                  specification_dir=str(Path(__file__).parent) + '/openapi/',
                                   options=options)
     connexion_app.add_api('swagger.yml')
     application = connexion_app.app
@@ -115,6 +115,11 @@ def login_post():
         return url_for('catalogue')
     error = "Please try again"
     return render_template('login.html', error=error)
+
+
+def gunicorn_run_app():
+    add_routes(app)
+    return app
 
 
 if __name__ == "__main__":
