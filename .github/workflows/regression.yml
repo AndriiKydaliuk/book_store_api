@@ -1,4 +1,5 @@
 name: regression
+#should be scheduled
 on: push
 
 jobs:
@@ -16,14 +17,12 @@ jobs:
         with:
           python-version: '3.10'
       - run: |
-          pip install flake8 pytest
+          pip install flake8 pytest gunicorn
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: run app
         run: |
-          export FLASK_APP=./app.py
-          export FLASK_DEBUG=0
-          flask run --host=127.0.0.1 --port=5000
+          gunicorn 'app:create_app()'
 
       - name: web tests
         run: |
