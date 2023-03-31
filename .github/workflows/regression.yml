@@ -19,13 +19,11 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+    - name: run app
+      run: |
+        python app.py
+        
 
-    - name: Api Tests
-      run: python Tests/APITests/test_user_service.py
-
-    - name: Unittests
-      run: python -m pytest --import-mode=append Tests/Unittests/
-
-
-    - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v2
+    - name: web tests
+      run: |
+        python -m pytest --import-mode=append Tests/UITests/
