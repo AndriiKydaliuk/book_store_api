@@ -118,14 +118,8 @@ def login_post():
 
 
 def gunicorn_run_app():
-    gunicorn_app = create_app()
-    add_routes(gunicorn_app)
-    # app.config.update({
-    #     "TESTING": True,
-    # })
-    # other setup can go here
-    return gunicorn_app
-
+    add_routes(app)
+    return app
 
 
 if __name__ == "__main__":
