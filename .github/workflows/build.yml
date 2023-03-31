@@ -34,11 +34,11 @@ jobs:
         run: |
           python -m pytest --import-mode=append Tests/Unittests/
 
-      - name: Generate Report
-        run: |
-          cd Tests  
-          ls -la 
-          coverage run -m unittest Unittests/
+#      - name: Generate Report
+#        run: |
+#          cd Tests
+#          ls -la
+#          coverage run -m unittest Unittests/
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2
