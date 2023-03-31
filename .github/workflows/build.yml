@@ -31,4 +31,6 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Unit test
-        run: ls -la && python -m pytest --import-mode=append Tests/Unittests/
+        run: |
+          cd Tests && ls -la
+          python -m pytest --import-mode=append Tests/Unittests/
