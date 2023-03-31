@@ -1,4 +1,5 @@
 name: regression
+on: push
 
 jobs:
   build:
