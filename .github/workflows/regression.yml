@@ -1,0 +1,31 @@
+name: regression
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+
+    - name: Api Tests
+      run: python Tests/APITests/test_user_service.py
+
+    - name: Unittests
+      run: python -m pytest --import-mode=append Tests/Unittests/
+
+
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v2
