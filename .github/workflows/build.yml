@@ -32,5 +32,4 @@ jobs:
 
       - name: Unit test
         run: |
-          cd Tests && ls -la
           python -m pytest --import-mode=append Tests/Unittests/
