@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.10'
       - run: |
-          pip install flake8 pytest
+          pip install flake8 pytest coverage
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Lint with flake8
@@ -33,3 +33,10 @@ jobs:
       - name: Unit test
         run: |
           python -m pytest --import-mode=append Tests/Unittests/
+
+      - name: Generate Report
+        run: |
+          coverage run -m unittest
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v2
