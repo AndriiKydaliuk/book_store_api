@@ -36,8 +36,6 @@ jobs:
 
       - name: Generate Report
         run: |
-          cd Tests
-          ls -la
           coverage run -m pytest --import-mode=append Tests/Unittests/
 
       - name: Upload Coverage to Codecov
