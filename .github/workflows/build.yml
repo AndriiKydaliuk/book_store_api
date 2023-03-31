@@ -36,8 +36,7 @@ jobs:
 
       - name: Generate Report
         run: |
-          ls -la
-          coverage run -m unittest Tests/Unittests/
+          ls -la && coverage run -m unittest Tests/Unittests/
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2
