@@ -17,7 +17,9 @@ def app():
     yield app
     # clean up / reset resources here
 
+
 @pytest.fixture()
 def driver():
     driver = webdriver.Chrome()
     yield driver
+

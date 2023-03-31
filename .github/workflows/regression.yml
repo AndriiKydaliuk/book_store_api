@@ -22,7 +22,7 @@ jobs:
 
       - name: run app
         run: |
-          gunicorn 'app:create_app()' --daemon
+          gunicorn 'app:gunicorn_run_app()' --daemon
 
       - name: web tests
         run: |

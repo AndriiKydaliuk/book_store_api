@@ -117,6 +117,17 @@ def login_post():
     return render_template('login.html', error=error)
 
 
+def gunicorn_run_app():
+    gunicorn_app = create_app()
+    add_routes(gunicorn_app)
+    # app.config.update({
+    #     "TESTING": True,
+    # })
+    # other setup can go here
+    return gunicorn_app
+
+
+
 if __name__ == "__main__":
     """Entry point."""
     # add routes for the created application
